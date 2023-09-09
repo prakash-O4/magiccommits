@@ -1,0 +1,7 @@
+setup.py
+magiccommits.egg-info/PKG-INFO
+magiccommits.egg-info/SOURCES.txt
+magiccommits.egg-info/dependency_links.txt
+magiccommits.egg-info/entry_points.txt
+magiccommits.egg-info/requires.txt
+magiccommits.egg-info/top_level.txt
