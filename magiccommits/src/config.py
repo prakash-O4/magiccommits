@@ -114,7 +114,6 @@ def read_config_file() -> Dict[str, str]:
 # Mocking 'getConfig' function
 @handleError
 def get_config(cli_config: Tuple = None) -> Dict[str, Union[str, int]]:
-    loading()
     config = read_config_file()
     parsed_config = {}
 
@@ -149,17 +148,3 @@ def set_configs(key_values: List[Tuple[str, str]]):
         for section, values in config.items():
             config_parser.set(section=CONFIG_SECTION, option=section,value=values)
         config_parser.write(config_file)
-
-
-def loading():
-    click.echo(click.style("Loading...",dim=True), nl=False)
-    
-    animation = "|/-\\"
-    
-    for _ in range(10):
-        for char in animation:
-            click.echo(char, nl=False)
-            time.sleep(0.1)
-            click.echo("\b", nl=False)  # Move the cursor back
-    
-    click.echo(" Done!")

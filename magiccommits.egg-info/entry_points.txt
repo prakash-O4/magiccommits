@@ -1,4 +1,3 @@
 [console_scripts]
 magiccommits = magiccommits.src.magiccommits:cli
 mc = magiccommits.src.magiccommits:cli
-

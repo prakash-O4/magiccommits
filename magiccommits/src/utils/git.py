@@ -15,20 +15,37 @@ def assert_git_repo():
 
 
 def get_staged_diff(exclude_files=None):
-    diff_cached = ['diff', '--cached', '--diff-algorithm=minimal']
+    diff_cached = ['diff', '--cached', '--diff-algorithm=minimal', '--ignore-space-change']
     
     # Run the 'git diff --cached --name-only' command to get staged files
-    result_files = subprocess.run(['git', *diff_cached, '--name-only', *exclude_files], stdout=subprocess.PIPE, text=True, check=True)
+    result_files = subprocess.run(['git', *diff_cached, '--name-only'], stdout=subprocess.PIPE, text=True, check=True)
     files = result_files.stdout.strip().split('\n')
 
     if not files:
         return None
 
     # Run the 'git diff --cached' command to get the staged diff
-    result_diff = subprocess.run(['git', *diff_cached, *exclude_files], stdout=subprocess.PIPE, text=True, check=True)
+    result_diff = subprocess.run(['git', *diff_cached], stdout=subprocess.PIPE, text=True, check=True)
     diff = result_diff.stdout
-
     return {
         'files': files,
         'diff': diff,
     }
+
+def get_detected_message(files):
+    if len(files) == 1:
+        return f"Detected {len(files):,} staged file"
+    else:
+        return f"Detected {len(files):,} staged files"
+    
+def is_repo_dirty():
+    try:
+        # Run the "git status" command
+        output = subprocess.check_output(['git', 'status', '--porcelain']).decode('utf-8').strip()
+
+        # Check if the output contains any lines indicating changes
+        return bool(output)
+    except subprocess.CalledProcessError:
+        # Handle any errors if the 'git status' command fails
+        print("Error running 'git status'")
+        return False

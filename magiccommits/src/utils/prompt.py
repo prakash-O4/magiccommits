@@ -11,10 +11,11 @@ commit_type_formats: Dict[CommitType, str] = {
 
 # Function to specify commit format
 def specify_commit_format(commit_type: CommitType) -> str:
-    return f"The output response must be in format:\n{commit_type_formats[commit_type]}"
+    return f"Your response should include the selected emoji and the corresponding <type> for the git diff.\nThe output response must be in format:\n{commit_type_formats[commit_type]}"
 
 emoji_types: Dict[EmojiType, str] = {
-    'conventional': """Choose an emoji from the given json which best fits the given diff type:
+    'conventional': """Select an emoji from the given options that best represents the git diff type:
+
 {
     "docs": "📚",
     "style": "💎",
@@ -31,7 +32,8 @@ emoji_types: Dict[EmojiType, str] = {
 }
 # Define commit types and descriptions
 commit_types: Dict[CommitType, str] = {
-    'conventional': """Choose a type from the type-to-description JSON below that best describes the git diff:
+    'conventional': """Now, choose a type from the type-to-description JSON below that best describes the git diff:
+
 {
     "docs": "Documentation only changes",
     "style": "Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
@@ -50,10 +52,10 @@ commit_types: Dict[CommitType, str] = {
 # Function to generate the prompt
 def generate_prompt(locale: str, max_length: int, commit_type: CommitType, emoji_type: EmojiType) -> str:
     prompt_parts = [
-        'Generate a concise git commit message written in present tense for the following code diff with the given specifications below:',
+        'Generate a concise Git commit message in the present tense based on the provided git diff. Your commit message should be comprehensive, descriptive, adhere to Git commit message best practices, and offer enough context for clear comprehension of the code changes.',
         f"Message language: {locale}",
-        f"Commit message must be a maximum of {max_length} characters.",
-        "Exclude anything unnecessary such as translation. Your entire response will be passed directly into git commit.",
+        f"Maximum Commit Message Length: {max_length} characters",
+        "Please exclude any superfluous information, such as translation details. Your entire response will be directly used as the git commit message.",
         emoji_types[emoji_type],
         commit_types[commit_type],
         specify_commit_format(commit_type)
