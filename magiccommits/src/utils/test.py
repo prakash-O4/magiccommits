@@ -3,7 +3,6 @@ import json
 from http.client import HTTPResponse
 
 from magiccommits.src.exception.error import NetworkError
-from magiccommits.src.exception.error_handler import handleError
 from magiccommits.src.utils.prompt import generate_prompt
 
 
@@ -199,7 +198,6 @@ def create_chat_completion(api_key, json_data, timeout, proxy=None):
     if not response.status or response.status < 200 or response.status > 299:
         error_message = {"error_type": f"OpenAI API Error: {response.status} - {response.reason}"}
         if data:
-            
             error_message['message'] = json.loads(data)['error']['message']
         if response.status == 500:
             error_message += "\n\nCheck the API status: https://status.openai.com"
@@ -236,7 +234,9 @@ def generate_commit_message(api_key, model, locale, diff, completions, max_lengt
         sanitized_messages = [sanitize_message(choice["message"]["content"]) for choice in completion["choices"] if
                               choice.get("message", {}).get("content")]
         return list(set(sanitized_messages))
-
+    
+    except NetworkError as e:
+        raise e
     except Exception as e:
         if hasattr(e, "hostname"):
             raise NetworkError({"message": f"Error connecting to {e.hostname} ({e.reason}). Are you connected to the internet?"})

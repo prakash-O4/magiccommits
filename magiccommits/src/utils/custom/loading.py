@@ -19,7 +19,7 @@ class Loading:
             self.isLoading = False
             if self.loading_thread:
                 self.loading_thread.join()
-            click.secho(" Done!",dim=True) if not is_forced else click.echo('\n')
+            click.secho(" Done!",dim=True) if not is_forced else click.echo(' \n')
 
     def _animate_loading(self):
         click.echo(click.style(self.message, dim=True), nl=False)
