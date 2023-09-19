@@ -1,80 +1,69 @@
 import click
-from magiccommits.src.utils.custom.confirmation_input import get_confirmation
 
-from magiccommits.src.utils.custom.input_validator import CustomIntRange
-from magiccommits.src.config import set_configs, get_config
-from magiccommits.src.utils.git import get_staged_diff
+#local import
+from magiccommits.src.exception.error_handler import handleError
+from magiccommits.src.utils.config.config import set_configs, get_config
+from magiccommits.src.utils.custom.loading import Loading
+from magiccommits.src.utils.git import assert_git_repo, get_detected_message, get_staged_diff
+from magiccommits.src.utils.style import format_response, multiple_answers
+from magiccommits.src.utils.test import generate_commit_message
 
 @click.group(invoke_without_command=True)
 # @click.option('--f', default=False, type=bool)
+@click.option('-t','--ticket',help='Set the ticket number')
+@click.version_option(version='1.0.0',help='Current version of magiccommit')
 @click.pass_context
-def cli(ctx):
+@handleError
+def cli(ctx,ticket):
     """This is the main command group."""
     if(ctx.invoked_subcommand is None):
-        # check if git is initialized or not
-        diff =  get_staged_diff()
-        click.echo(diff)
-        #start loading with message 
-        # get the git diff 
-        # if not diff is found then display message and exit the termainal with exit code 0
-        # if diff is found then get all the configs 
-        
+        loading = Loading('Generating Commits.. ')
+        try:
+            # check if git is initialized or not
+            assert_git_repo()
+            # get the git diff of the current project
+            diff =  get_staged_diff()
+            if(diff is None):
+                click.secho('No stage files detected.',fg='red')
+            else:
+                click.secho(get_detected_message(diff['files']),fg='green')
+                # get all the value from the config file i.e .mc file in the '~' directory
+                config = get_config(internal=True)
+                loading.start()
+                # generate commit
+                commit = generate_commit_message(config.OPENAI_KEY,config.model,config.locale,diff['diff'],config.generate,config.max_length,config.type,config.max_token,config.timeout)
+                loading.stop()
+                multiple_answers(commit_message=commit,ticket=ticket,copy_commit=config.copy_commit)
+        except Exception as e: 
+            loading.stop(is_forced=True)
+            raise Exception()
     else:
         pass
 
 @cli.command('config', short_help='Configuration for magiccommit')
 @click.argument('mode',type=click.Choice(['get','set']))
 @click.argument('key_value',nargs=-1)
+@handleError
 def config(mode,key_value):
     """Set your configuration value for the magic commit [Learn More]"""
     if(mode == 'get'):
-        config_value =  get_config(key_value)
-        click.echo(config_value)
-    elif(mode == 'set'):
+        all_value=False
+        if(len(key_value)==0):
+            all_value=True
+        config_value =  get_config(key_value,internal=all_value)
+        format_response(config_value.all())
+    elif(mode == 'set'): 
         value = []
-        for kv in key_value:
-            splitted_text = str(kv).strip().split("=")
-            if(len(splitted_text) > 1):
-                value.append((splitted_text[0],splitted_text[1]))
-                set_configs(value)
+        if len(key_value) == 0:
+            click.secho("Enter value in mc config set key=value",fg='red')
+        else:
+            for kv in key_value:
+                splitted_text = str(kv).strip().split("=")
+                if(len(splitted_text) > 1):
+                    value.append((splitted_text[0],splitted_text[1]))
+                    set_configs(value)
+                else:
+                    click.secho("The key must be in the format key=value.",fg='red')
+                    break
 
-
-# Default behavior when no subcommand is provided
-# @cli.command('config',short_help='Configuration for magiccommit')
-# def default_action():
-#     """This is the default action."""
-#     click.echo("Running the default action")
-
-
-def multiple_answers():
-    """List messages."""
-    messages = ["message1", "message2", "message3"]
-     # Create a list of tuples for click.Choice options
-    choices = [(str(i + 1), message) for i, message in enumerate(messages)]
-
-    click.echo("List of messages:")
-    for i, message in enumerate(messages, start=1):
-        click.echo(f"{i}. {message}")
-    while True:
-
-        try:
-            # Prompt the user to select a message with arrow key navigation
-            selection = click.prompt(
-                "\nSelect a message (enter the number)",
-                type=CustomIntRange(1, len(messages)),
-                err=True,
-                # confirmation_prompt= "Do you want to commit this message into your repo?"
-            )
-            vals  = get_confirmation()
-            if(vals):
-                click.echo("push it")
-                selected_message = messages[selection - 1]
-                click.echo(f"Selected message: {selected_message}")
-            else:
-                click.echo("copy and exit the terminal")
-            break  # Exit the loop if valid input is provided
-        except click.exceptions.BadParameter:
-            click.echo("Invalid input. Please enter a valid number from the list.")
-        except Exception as e:
-            click.echo("Wrong!!!!!")
 

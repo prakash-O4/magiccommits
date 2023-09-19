@@ -1,6 +1,8 @@
 
 import click
 
+from magiccommits.src.exception.error import KnownError
+
 
 class CustomIntRange(click.ParamType):
     def __init__(self, min_value, max_value):
@@ -14,4 +16,4 @@ class CustomIntRange(click.ParamType):
                 return value
         except ValueError:
             pass
-        raise Exception("Invalid value")
+        raise KnownError()

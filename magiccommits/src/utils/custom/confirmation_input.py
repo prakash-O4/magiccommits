@@ -14,4 +14,4 @@ def get_confirmation():
         elif confirmation in ("no", "n"):
             return False
         else:
-            click.echo("Invalid input. Please enter 'yes/y' or 'no/n'.")
+            click.secho("\nInvalid input. Please enter 'yes/y' or 'no/n'.\n", fg='red')

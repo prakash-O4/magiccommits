@@ -1,4 +1,5 @@
 import subprocess
+import time
 from magiccommits.src.exception.error import error
 
 def assert_git_repo():
@@ -11,10 +12,10 @@ def assert_git_repo():
 
     except subprocess.CalledProcessError:
         # If the command failed, raise a KnownError exception
-        raise error('The current directory must be a Git repository!')
+        raise error('The current directory must be a git repository!')
 
 
-def get_staged_diff(exclude_files=None):
+def get_staged_diff():
     diff_cached = ['diff', '--cached', '--diff-algorithm=minimal', '--ignore-space-change']
     
     # Run the 'git diff --cached --name-only' command to get staged files
@@ -38,6 +39,16 @@ def get_detected_message(files):
     else:
         return f"Detected {len(files):,} staged files"
     
+
+def add_commit_message(message) -> bool:
+    if message is not None:
+        try:
+            subprocess.run(['git','commit','-m',message])
+            return True
+        except Exception:
+            return False
+    else:
+        return False
 def is_repo_dirty():
     try:
         # Run the "git status" command

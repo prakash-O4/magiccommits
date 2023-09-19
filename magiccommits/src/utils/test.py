@@ -1,11 +1,10 @@
 import http.client
 import json
-import ssl
 from http.client import HTTPResponse
-from typing import Dict, Any, Optional, List
-from magiccommits.src.exception.error import NetworkError
 
+from magiccommits.src.exception.error import NetworkError
 from magiccommits.src.exception.error_handler import handleError
+from magiccommits.src.utils.prompt import generate_prompt
 
 
 
@@ -87,12 +86,11 @@ test_type = "conventional"
 test_timeout = 600
 
 test_prompt = """Generate a concise Git commit message in the present tense based on the provided git diff. 
-Your commit message should be comprehensive, descriptive, adhere to Git commit message best practices, and offer enough context for clear comprehension of the code changes.
+Your commit message should not be detailed technical message, it should be simple summary of the provided git diff.
+Please exclude any superfluous information, such as translation details. Your entire response will be directly used as the git commit message.
 
 Message language: English
 Maximum Commit Message Length: 80 characters
-
-Please exclude any superfluous information, such as translation details. Your entire response will be directly used as the git commit message.
 
 Choose a type from the type-to-description JSON below that best describes the git diff:
 
@@ -198,7 +196,6 @@ def create_chat_completion(api_key, json_data, timeout, proxy=None):
 
     response = result["response"]
     data = result["data"]
-    print(data)
     if not response.status or response.status < 200 or response.status > 299:
         error_message = {"error_type": f"OpenAI API Error: {response.status} - {response.reason}"}
         if data:
@@ -215,13 +212,9 @@ def sanitize_message(message):
     return message.strip().replace("\n", "").replace("\r", "").rstrip(".")
 
 
-def deduplicate_messages(array):
-    return list(set(array))
-
-@handleError
-def generate_commit_message(api_key, model, locale, diff, completions, max_length, type, timeout, proxy=None):
+def generate_commit_message(api_key, model, locale, diff, completions, max_length, type,max_token ,timeout, proxy=None):
     try:
-        system_message = test_prompt  # Define generate_prompt function
+        system_message = generate_prompt(locale, max_length, type)  # Define generate_prompt function
         messages = [
             {"role": "system", "content": system_message},
             {"role": "user", "content": diff},
@@ -234,7 +227,7 @@ def generate_commit_message(api_key, model, locale, diff, completions, max_lengt
             "top_p": 1,
             "frequency_penalty": 0,
             "presence_penalty": 0,
-            "max_tokens": 200,
+            "max_tokens": max_token,
             "stream": False,
             "n": completions,
         }
@@ -242,13 +235,9 @@ def generate_commit_message(api_key, model, locale, diff, completions, max_lengt
         completion = create_chat_completion(api_key, json_data, timeout, proxy)
         sanitized_messages = [sanitize_message(choice["message"]["content"]) for choice in completion["choices"] if
                               choice.get("message", {}).get("content")]
-        return deduplicate_messages(sanitized_messages)
+        return list(set(sanitized_messages))
 
     except Exception as e:
         if hasattr(e, "hostname"):
             raise NetworkError({"message": f"Error connecting to {e.hostname} ({e.reason}). Are you connected to the internet?"})
         raise e
-
-# commit = generate_commit_message(test_api_key,"gpt-3.5-turbo",test_locale,test_diff_doc,test_completions,test_max_length,test_type,test_timeout)
-# for c in commit:
-#     print(c)
