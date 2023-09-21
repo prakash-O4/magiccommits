@@ -1,5 +1,4 @@
 import subprocess
-import time
 from magiccommits.src.exception.error import error
 
 def assert_git_repo():
@@ -21,8 +20,7 @@ def get_staged_diff():
     # Run the 'git diff --cached --name-only' command to get staged files
     result_files = subprocess.run(['git', *diff_cached, '--name-only'], stdout=subprocess.PIPE, text=True, check=True)
     files = result_files.stdout.strip().split('\n')
-
-    if not files:
+    if not files or files == ['']:
         return None
 
     # Run the 'git diff --cached' command to get the staged diff
@@ -49,6 +47,15 @@ def add_commit_message(message) -> bool:
             return False
     else:
         return False
+    
+def push_to_origin() -> bool:
+    try:
+        subprocess.run(['git','push'])
+        return True
+    except Exception:
+        return False
+
+
 def is_repo_dirty():
     try:
         # Run the "git status" command

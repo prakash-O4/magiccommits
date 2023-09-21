@@ -4,14 +4,16 @@ import click
 def get_confirmation():
     while True:
         confirmation = click.prompt(
-            "Do you want to commit this message into your repo? (yes/no)",
-            default="no",
+            "Enter [c/C] to commit or [cp/CP] to commit and push or [n/N] to cancel: ",
+            default="n",
             show_default=False,
         ).lower()
 
-        if confirmation in ("yes", "y"):
-            return True
-        elif confirmation in ("no", "n"):
-            return False
+        if confirmation.lower() == "c":
+            return "c"
+        elif confirmation.lower() == "cp":
+            return "cp"
+        elif confirmation.lower() == 'n':
+            return "n"
         else:
-            click.secho("\nInvalid input. Please enter 'yes/y' or 'no/n'.\n", fg='red')
+            click.secho("\nInvalid input. Please enter [c/C] or [y/Y] or [n/N].\n", fg='red')

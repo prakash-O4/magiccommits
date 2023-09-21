@@ -1,4 +1,3 @@
-import time
 import click
 from magiccommits.src.exception.error import NetworkError
 

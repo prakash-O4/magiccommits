@@ -24,8 +24,8 @@ jobs:
       - name: Build the distribution
         run: python setup.py sdist bdist_wheel
 
-      - name: Publish MultiQC to PyPI
-        if: github.repository == 'ewels/MultiQC'
+      - name: Publish Magiccommit to PyPI
+        if: github.repository == 'prakashBasnet3213/magiccommit'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
