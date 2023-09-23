@@ -52,7 +52,7 @@ def generate_prompt(locale: str, max_length: int, commit_type: CommitType) -> st
     prompt_parts = [
         'Generate a concise Git commit message in the present tense based on the provided git diff. Your commit message should not be detailed technical message, it should be simple summary of the provided git diff.',
         f"Message language of all commits should be in: {locale}",
-        f"Maximum Commit Message Length: {max_length} characters",
+        f"Each commit message should have maximum {max_length} characters in it.",
         "Please exclude any superfluous information, such as translation details. Your entire response will be directly used as the git commit message.",
         commit_types,
         emoji_types if commit_type != "message" else "",
