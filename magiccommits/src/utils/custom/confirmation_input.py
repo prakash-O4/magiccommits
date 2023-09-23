@@ -16,4 +16,4 @@ def get_confirmation():
         elif confirmation.lower() == 'n':
             return "n"
         else:
-            click.secho("\nInvalid input. Please enter [c/C] or [y/Y] or [n/N].\n", fg='red')
+            click.secho("\nInvalid input. Please enter [c/C] or [cp/CP] or [n/N].\n", fg='red')

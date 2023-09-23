@@ -12,7 +12,7 @@ from magiccommits.src.utils.test import generate_commit_message
 @click.group(invoke_without_command=True)
 # @click.option('--f', default=False, type=bool)
 @click.option('-t','--ticket',help='Set the ticket number')
-@click.version_option(version='1.0.0',help='Current version of magiccommit')
+@click.version_option(message="Magiccommit v0.1dev" ,help='Current version of magiccommit')
 @click.pass_context
 @handleError
 def cli(ctx,ticket):
