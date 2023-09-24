@@ -27,15 +27,16 @@ setup(
     long_description=__doc__,
     keywords=["Git","Commits","Automation", "Code","Version","Control","Productivity","Diffs"],
     include_package_data=True,
-    packages=find_packages(),
+    packages=find_packages(exclude=["dist", "build", "*.egg-info"]),
+    py_modules= ['magiccommits'],
     install_requires=[
         'click',
         'pyperclip',
     ],
     entry_points={
         'console_scripts': [
-            'magiccommits=magiccommits.src.magiccommits:cli',
-            'mc=magiccommits.src.magiccommits:cli'
+            'magiccommits=magiccommits.main:cli',
+            'mc=magiccommits.main:cli'
         ],
     },
 )

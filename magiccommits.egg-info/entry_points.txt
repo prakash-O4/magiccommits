@@ -1,3 +1,3 @@
 [console_scripts]
-magiccommits = magiccommits.src.magiccommits:cli
-mc = magiccommits.src.magiccommits:cli
+magiccommits = magiccommits.main:cli
+mc = magiccommits.main:cli

@@ -1,1 +1,0 @@
-from .magiccommits import cli
