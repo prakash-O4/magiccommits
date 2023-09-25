@@ -36,7 +36,16 @@ def get_detected_message(files):
         return f"Detected {len(files):,} staged file"
     else:
         return f"Detected {len(files):,} staged files"
-    
+
+def stage_change(add:bool):
+    try:
+        if(add):
+            subprocess.run(['git', 'add', '.'], check=True)
+        else:
+            subprocess.run(['git', 'add', '--update'], check=True)
+    except subprocess.CalledProcessError:
+        raise error("Error: Couldn't stage the changes. Please try to stage them manually using 'git add'.")
+   
 
 def add_commit_message(message) -> bool:
     if message is not None:
@@ -55,15 +64,13 @@ def push_to_origin() -> bool:
     except Exception:
         return False
 
+# Run 'git status --porcelain' to get the status of the repository
+# result = subprocess.run(['git', 'status', '--porcelain'], capture_output=True, text=True, check=True)
 
-def is_repo_dirty():
-    try:
-        # Run the "git status" command
-        output = subprocess.check_output(['git', 'status', '--porcelain']).decode('utf-8').strip()
+# Split the output into lines and filter staged files (status starts with "A", "M", "R", etc.)
+# staged_files = [line for line in result.stdout.splitlines() if line.startswith(('A', 'M', 'R', 'C', 'D'))]
 
-        # Check if the output contains any lines indicating changes
-        return bool(output)
-    except subprocess.CalledProcessError:
-        # Handle any errors if the 'git status' command fails
-        print("Error running 'git status'")
-        return False
+# Count the number of staged files
+# number_of_staged_files = len(staged_files)
+
+# return number_of_staged_files

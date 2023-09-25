@@ -1,10 +1,10 @@
 """Magic Commit is a Python-based automation tool that revolutionizes the Git commit process. It intelligently analyzes code changes and generates concise commit messages, simplifying version control. Install Magic Commit from PyPI with:
 
-pip install magiccommit
+pip install magiccommits
 
 Navigate to your project directory and execute:
 
-magiccommit or mc
+magiccommits or mc
 
 Magic Commit scans your codebase, crafting meaningful commit messages by default. Experience streamlined version control effortlessly.
 
@@ -12,7 +12,7 @@ For in-depth usage instructions, run:
 
 mc --help
 
-Visit the Magic Commit repository for comprehensive documentation and video tutorials: http://magic-commit.io
+Visit the Magic Commit repository for comprehensive documentation: https://github.com/prakashBasnet3213/magiccommit
 
 Developed by Prakash Basnet, Inspired from [https://github.com/Nutlope/aicommits]"""
 

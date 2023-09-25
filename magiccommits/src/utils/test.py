@@ -1,5 +1,6 @@
 import http.client
 import json
+import socket
 from http.client import HTTPResponse
 
 from magiccommits.src.exception.error import NetworkError
@@ -171,6 +172,8 @@ def https_post(hostname, path, headers, json_data, timeout, proxy=None):
         response_data = response.read()
         connection.close()
     except Exception as e:
+        if not has_internet_connection():
+            raise NetworkError({"message": f"Are you connected to Internet?"})
         raise NetworkError({"message": f"Error making POST request: {str(e)}"})
 
     return {
@@ -178,6 +181,15 @@ def https_post(hostname, path, headers, json_data, timeout, proxy=None):
         "data": response_data.decode("utf-8")
     }
 
+
+def has_internet_connection():
+    try:
+        # Attempt to connect to Google's DNS server (8.8.8.8) on port 53 (DNS)
+        socket.create_connection(("8.8.8.8", 53), timeout=5)
+        return True  # If successful, there is internet connectivity
+    except OSError:
+        pass
+    return False
 
 def create_chat_completion(api_key, json_data, timeout, proxy=None):
     headers = {
@@ -235,9 +247,5 @@ def generate_commit_message(api_key, model, locale, diff, completions, max_lengt
                               choice.get("message", {}).get("content")]
         return list(set(sanitized_messages))
     
-    except NetworkError as e:
-        raise e
     except Exception as e:
-        if hasattr(e, "hostname"):
-            raise NetworkError({"message": f"Error connecting to {e.hostname} ({e.reason}). Are you connected to the internet?"})
         raise e
