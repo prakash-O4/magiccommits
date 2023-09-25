@@ -8,6 +8,9 @@ magiccommits.egg-info/entry_points.txt
 magiccommits.egg-info/requires.txt
 magiccommits.egg-info/top_level.txt
 magiccommits/src/__init__.py
+magiccommits/src/commands/__init__.py
+magiccommits/src/commands/config.py
+magiccommits/src/commands/mc.py
 magiccommits/src/exception/__init__.py
 magiccommits/src/exception/error.py
 magiccommits/src/exception/error_handler.py
@@ -18,10 +21,11 @@ magiccommits/src/utils/prompt.py
 magiccommits/src/utils/style.py
 magiccommits/src/utils/test.py
 magiccommits/src/utils/config/__init__.py
-magiccommits/src/utils/config/config.py
+magiccommits/src/utils/config/config_helper.py
 magiccommits/src/utils/config/config_parser.py
 magiccommits/src/utils/config/config_response.py
 magiccommits/src/utils/custom/__init__.py
 magiccommits/src/utils/custom/confirmation_input.py
 magiccommits/src/utils/custom/input_validator.py
+magiccommits/src/utils/custom/interactive_terminal.py
 magiccommits/src/utils/custom/loading.py
