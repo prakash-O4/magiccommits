@@ -67,4 +67,5 @@ def select(
             break
         elif keypress in DefaultKeys.interrupt:
             raise KeyboardInterrupt
+        
     return selected_index

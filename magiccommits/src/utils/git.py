@@ -33,9 +33,9 @@ def get_staged_diff():
 
 def get_detected_message(files):
     if len(files) == 1:
-        return f"Detected {len(files):,} staged file"
+        return f"💡 Detected {len(files):,} staged file"
     else:
-        return f"Detected {len(files):,} staged files"
+        return f"💡 Detected {len(files):,} staged files"
 
 def stage_change(add:bool):
     try:
@@ -50,7 +50,7 @@ def stage_change(add:bool):
 def add_commit_message(message) -> bool:
     if message is not None:
         try:
-            subprocess.run(['git','commit','-m',message])
+            subprocess.run(['git','commit','-m',message],check=True)
             return True
         except Exception:
             return False
@@ -59,7 +59,7 @@ def add_commit_message(message) -> bool:
     
 def push_to_origin() -> bool:
     try:
-        subprocess.run(['git','push'])
+        subprocess.run(['git','push'],check=True)
         return True
     except Exception:
         return False

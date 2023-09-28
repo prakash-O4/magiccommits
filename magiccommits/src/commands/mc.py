@@ -10,13 +10,13 @@ from magiccommits.src.utils.git import (
     stage_change,
 )
 from magiccommits.src.utils.style import multiple_answers
-from magiccommits.src.utils.test import generate_commit_message
+from magiccommits.src.utils.open_ai_commit import generate_commit_message
 
 @click.option('-t','--ticket',help='Set the ticket number')
 @click.option('-a','--add',is_flag=True, flag_value=True,help='Perform git add . operation')
 def mc(ctx,ticket,add,update):
     if(ctx.invoked_subcommand is None):
-        loading = Loading('Generating Commits.. ')
+        loading = Loading('⌛ Generating Commits.. ')
         try:
             # check if git is initialized or not
             assert_git_repo()
