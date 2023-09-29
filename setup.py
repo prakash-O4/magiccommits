@@ -52,7 +52,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
-        "Development Status :: 0.5 - Dev"
+        "Development Status :: 0.5 - Dev",
         "License :: OSI Approved :: MIT License",
     ],
 )
