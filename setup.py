@@ -21,7 +21,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='magiccommits',
-    version='0.3-dev',
+    version='0.4-dev',
     author='Prakash Basnet',
     description="Automate Git commits with Magic Commit: Smart, concise messages generated from code diffs",
     long_description=__doc__,
