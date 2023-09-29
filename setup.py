@@ -19,12 +19,18 @@ Developed by Prakash Basnet, Inspired from [https://github.com/Nutlope/aicommits
 
 from setuptools import setup, find_packages
 
+with open("README.md", "r") as f:
+    long_description = f.read()
+
 setup(
     name='magiccommits',
     version='0.4-dev',
     author='Prakash Basnet',
+    url="https://github.com/prakashBasnet3213/magiccommit",
+    license="MIT",
+    long_description_content_type="text/markdown",
     description="Automate Git commits with Magic Commit: Smart, concise messages generated from code diffs",
-    long_description=__doc__,
+    long_description=long_description,
     keywords=["Git","Commits","Automation", "Code","Version","Control","Productivity","Diffs"],
     include_package_data=True,
     packages=find_packages(exclude=["dist", "build", "*.egg-info"]),
@@ -40,6 +46,15 @@ setup(
             'mc=magiccommits.main:cli'
         ],
     },
+     classifiers=[
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Operating System :: OS Independent",
+        "Development Status :: 0.4 - Dev"
+        "License :: OSI Approved :: MIT License",
+    ],
 )
 
 print(
