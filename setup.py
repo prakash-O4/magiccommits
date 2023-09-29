@@ -24,7 +24,7 @@ with open("README.md", "r") as f:
 
 setup(
     name='magiccommits',
-    version='0.4-dev',
+    version='0.5-dev',
     author='Prakash Basnet',
     url="https://github.com/prakashBasnet3213/magiccommit",
     license="MIT",
@@ -52,7 +52,7 @@ setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Operating System :: OS Independent",
-        "Development Status :: 0.4 - Dev"
+        "Development Status :: 0.5 - Dev"
         "License :: OSI Approved :: MIT License",
     ],
 )
