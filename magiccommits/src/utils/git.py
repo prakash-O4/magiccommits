@@ -14,6 +14,13 @@ def assert_git_repo():
         raise error('The current directory must be a git repository!')
 
 
+def get_current_branch():
+    try:
+        branch_name = subprocess.check_output(['git', 'rev-parse', '--abbrev-ref', 'HEAD']).decode('utf-8').strip()
+        return branch_name
+    except Exception:
+        return None
+
 def get_staged_diff():
     diff_cached = ['diff', '--cached', '--diff-algorithm=minimal', '--ignore-space-change']
     
@@ -59,8 +66,11 @@ def add_commit_message(message) -> bool:
     
 def push_to_origin() -> bool:
     try:
-        subprocess.run(['git','push'],check=True)
-        return True
+        branch_name = get_current_branch()
+        if(branch_name is not None):
+            subprocess.run(['git','push','origin',branch_name],check=True)
+            return True
+        else: return False
     except Exception:
         return False
 

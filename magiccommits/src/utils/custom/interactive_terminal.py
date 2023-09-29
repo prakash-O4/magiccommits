@@ -39,7 +39,6 @@ def select(
         print(f"\033[{len(options) + 1}A")
         for i, option in enumerate(options):
             if i not in caption_indices:
-                # Set the entire line (including "x" and option) based on selection status
                 line = selected_prefix + option if i == selected_index else deselected_prefix + option
                 click.secho(message=line,fg='green') if i == selected_index else click.secho(message=line)
             elif i in caption_indices:
