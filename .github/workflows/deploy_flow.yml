@@ -2,7 +2,7 @@ name: Publish Magiccommit to PyPI
 on:
   push:
     branches:
-      - main
+      - mains
     # tags: 
     #   - "v*"
 

@@ -1,15 +1,16 @@
-# MagicCommit
+# MagicCommits
 
 A Git commit message generator powered by AI. Never struggle with commit messages again.
 
-![PyPI - Downloads](https://img.shields.io/pypi/dd/magiccommits)
-
+<img src="https://img.shields.io/pypi/v/magiccommits?color=%2334D058" />
+<img src="https://img.shields.io/pypi/pyversions/magiccommits?color=%2334D058" />
+<img src="https://img.shields.io/pypi/l/magiccommits?color=%2334D058" />
 
 ---
 
 ## Installation
 
-Before you start using MagicCommit, make sure you have Python and pip installed. Then, you can install MagicCommit using pip:
+Before you start using MagicCommits, make sure you have Python and pip installed. Then, you can install MagicCommits using pip:
 
 ```sh
 pip install magiccommits
@@ -19,7 +20,7 @@ If you are using python3 then
 ```sh
 pip3 install magiccommits
 ```
-Before you can use MagicCommit, you'll need to configure it with your OpenAI API key. If you haven't already, you can retrieve your API key from [OpenAI](https://platform.openai.com/account/api-keys) (Note: You may need to create an account and set up billing).
+Before you can use MagicCommits, you'll need to configure it with your OpenAI API key. If you haven't already, you can retrieve your API key from [OpenAI](https://platform.openai.com/account/api-keys) (Note: You may need to create an account and set up billing).
 
 **Set the OPENAI_KEY**
  ```bash
@@ -229,14 +230,14 @@ mc config get
 
 ### Generate Commit Messages
 
-You can use MagicCommit to effortlessly generate commit messages for your staged changes:
+You can use MagicCommits to effortlessly generate commit messages for your staged changes:
 
 
-MagicCommit will analyze your Git diff and employ AI to suggest a commit message. You can then choose to commit, commit and push, or copy the message to your clipboard.
+MagicCommits will analyze your Git diff and employ AI to suggest a commit message. You can then choose to commit, commit and push, or copy the message to your clipboard.
 
 ### Version
 
-To check the current version of MagicCommit, you can use the following command:
+To check the current version of MagicCommits, you can use the following command:
 
 ```sh
 mc --version
@@ -244,7 +245,7 @@ mc --version
 
 ## Credits
 
-MagicCommit is inspired by [AI Commits](https://github.com/Nutlope/aicommits), created by [Hassan El Mghari](https://github.com/Nutlope).
+MagicCommits is inspired by [AI Commits](https://github.com/Nutlope/aicommits), created by [Hassan El Mghari](https://github.com/Nutlope).
 
 ## License
 
