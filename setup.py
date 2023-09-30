@@ -12,7 +12,7 @@ For in-depth usage instructions, run:
 
 mc --help
 
-Visit the Magic Commit repository for comprehensive documentation: https://github.com/prakashBasnet3213/magiccommit
+Visit the Magic Commit repository for comprehensive documentation: https://github.com/prakash-O4/magiccommits
 
 Developed by Prakash Basnet, Inspired from [https://github.com/Nutlope/aicommits]"""
 
@@ -24,14 +24,14 @@ with open("README.md", "r") as f:
 
 setup(
     name='magiccommits',
-    version='0.6-dev',
+    version='0.7-dev',
     author='Prakash Basnet',
-    url="https://github.com/prakashBasnet3213/magiccommit",
+    url="https://github.com/prakash-O4/magiccommits",
     license="MIT",
     long_description_content_type="text/markdown",
-    description="Automate Git commits with Magic Commit: Smart, concise messages generated from code diffs",
+    description="Magiccommit: Effortless Git Commits with AI",
     long_description=long_description,
-    keywords=["Git","Commits","Automation", "Code","Version","Control","Productivity","Diffs"],
+    keywords=["Git","Commits","Automation", "Code","Version","Control","ai commit","Commit messages"],
     include_package_data=True,
     packages=find_packages(exclude=["dist", "build", "*.egg-info"]),
     py_modules= ['magiccommits'],

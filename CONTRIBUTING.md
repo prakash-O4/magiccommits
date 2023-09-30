@@ -4,7 +4,7 @@
 
 Clone the project into your machine 
 ```sh
-git clone https://github.com/prakashBasnet3213/magiccommit.git
+git clone https://github.com/prakash-O4/magiccommits.git
 ```
 
 Activate virtual environment
@@ -42,4 +42,4 @@ pip3 install /path/to/dist/***.gz
 
 This will install the magiccommits in your machine locally and you can execute globally.
 
-If you faced any issue then feel free to open PR in https://github.com/prakashBasnet3213/magiccommit/issues.
+If you faced any issue then feel free to open PR in https://github.com/prakash-O4/magiccommits/issues.

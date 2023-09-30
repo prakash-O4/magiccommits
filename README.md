@@ -1,6 +1,6 @@
 # MagicCommits
 
-A Git commit message generator powered by AI. Never struggle with commit messages again.
+Magiccommits: Effortless Git Commits with AI
 
 <img src="https://img.shields.io/pypi/v/magiccommits?color=%2334D058" />
 <img src="https://img.shields.io/pypi/pyversions/magiccommits?color=%2334D058" />
@@ -250,7 +250,7 @@ MagicCommits is inspired by [AI Commits](https://github.com/Nutlope/aicommits), 
 
 ## Contributing
 
-If you want to help fix a bug or implement a feature in [Issues](https://github.com/prakashBasnet3213/magiccommit/issues), checkout the [Contribution Guide](CONTRIBUTING.md) to learn how to setup project.
+If you want to help fix a bug or implement a feature in [Issues](https://github.com/prakash-O4/magiccommits/issues), checkout the [Contribution Guide](CONTRIBUTING.md) to learn how to setup project.
 
 ## License
 

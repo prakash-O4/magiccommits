@@ -37,6 +37,9 @@ def mc(ctx,ticket,add,update):
                 commit = generate_commit_message(config.OPENAI_KEY,config.model,config.locale,diff['diff'],config.generate,config.max_length,config.type,config.max_token,config.timeout)
                 loading.stop()
                 multiple_answers(commit_message=commit,ticket=ticket,copy_commit=config.copy_commit)
+        except KeyboardInterrupt as e:
+            loading.stop(is_forced=True)
+            raise e
         except Exception as e: 
             loading.stop(is_forced=True)
             raise e
