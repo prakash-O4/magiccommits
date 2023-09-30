@@ -13,6 +13,6 @@ def handleError(func):
             click.secho(e.error.get('message'),fg='red')
             click.get_current_context().exit(code=1)
         except Exception as e:
-            click.secho("Oops, we got an untracked error, Please report it to https://status.openai.com.",fg='red')
+            click.secho("Oops, we got an untracked error, Please report it to https://github.com/prakashBasnet3213/magiccommit/issues.",fg='red')
             click.get_current_context().exit(code=1)
     return wrapper

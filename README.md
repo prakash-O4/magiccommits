@@ -26,6 +26,7 @@ Before you can use MagicCommits, you'll need to configure it with your OpenAI AP
  ```bash
     mc config set OPENAI_KEY=<your-token>
 ```
+This will create a .mc file in your home directory `(~/.mc)`.
 
 ## Usage
 Execute `magiccommits or mc` to generate the commit messages
@@ -246,6 +247,10 @@ mc --version
 ## Credits
 
 MagicCommits is inspired by [AI Commits](https://github.com/Nutlope/aicommits), created by [Hassan El Mghari](https://github.com/Nutlope).
+
+## Contributing
+
+If you want to help fix a bug or implement a feature in [Issues](https://github.com/prakashBasnet3213/magiccommit/issues), checkout the [Contribution Guide](CONTRIBUTING.md) to learn how to setup project.
 
 ## License
 
