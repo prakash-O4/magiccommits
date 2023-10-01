@@ -8,7 +8,7 @@ from magiccommits.src.exception.error_handler import handleError
 @click.option('-t','--ticket',help='Set the ticket number')
 @click.option('-a','--add',is_flag=True, flag_value=True,help='Perform [git add .] operation')
 @click.option('-u','--update',is_flag=True, flag_value=True,help='Perform [git add --update] operation')
-@click.version_option(message="Magiccommit v0.7-dev" ,help='Current version of magiccommit')
+@click.version_option(message="Magiccommits v0.8-dev" ,help='Current version of magiccommit')
 @click.pass_context
 @handleError
 def cli(ctx,ticket,add,update):

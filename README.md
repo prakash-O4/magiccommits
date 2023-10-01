@@ -1,6 +1,11 @@
 # MagicCommits
-
-Magiccommits: Effortless Git Commits with AI
+<div align="center">
+  <div>
+    <img src="demo/mc_screenshot.png" alt="Magiccommits"/>
+    <h1 align="center">Magiccommits</h1>
+  </div>
+	<p>Magiccommits: Effortless Git Commits with AI</p>
+</div>
 
 <img src="https://img.shields.io/pypi/v/magiccommits?color=%2334D058" />
 <img src="https://img.shields.io/pypi/pyversions/magiccommits?color=%2334D058" />
@@ -40,12 +45,18 @@ Execute `magiccommits or mc` to generate the commit messages
 | 2     | `-a` or `--add`    | `mc -a`             | Perform a `git add .` operation before commit |
 | 3     | `-u` or `--update` | `mc commit -u`        | Perform a `git add --update` operation        |
 
-- Command: Specifies the command or option to use.
-- Example: Provides an example usage of the option in a command.
-- Functionality: Describes the functionality or purpose of the option.
 
 You can use these additional options to customize your commit messages and perform relevant Git operations as needed in your project workflow.
 
+<details><summary><strong>Demo: mc -a</strong></summary>
+
+<img src = "demo/mc-a.gif" width="700" alt="mc -a" />
+</details>
+
+<details><summary><strong>Demo: copy message to clipboard</strong></summary>
+
+<img src = "demo/mc-copy.gif" width="700" alt="mc -a" />
+</details>
 
 ## Configuration
 
