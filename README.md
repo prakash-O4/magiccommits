@@ -1,10 +1,9 @@
 # MagicCommits
 <div align="center">
+<p>Magiccommits: Effortless Git Commits with AI</p>
   <div>
     <img src="demo/mc_screenshot.png" alt="Magiccommits"/>
-    <h1 align="center">Magiccommits</h1>
   </div>
-	<p>Magiccommits: Effortless Git Commits with AI</p>
 </div>
 
 <img src="https://img.shields.io/pypi/v/magiccommits?color=%2334D058" />
